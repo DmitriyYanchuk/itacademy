@@ -1,0 +1,19 @@
+-------------------------------------------------------------------------------
+Test set: yanchuk.autodiagnosticcenter.writer.JsonTransportWriterTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.113 s <<< FAILURE! -- in yanchuk.autodiagnosticcenter.writer.JsonTransportWriterTest
+yanchuk.autodiagnosticcenter.writer.JsonTransportWriterTest.testInvalidTransportSuccessfulWriting -- Time elapsed: 0.062 s <<< ERROR!
+java.nio.charset.MalformedInputException: Input length = 1
+	at java.base/java.lang.String.throwMalformed(String.java:1240)
+	at java.base/java.lang.String.decodeUTF8_UTF16(String.java:1191)
+	at java.base/java.lang.String.newStringUTF8NoRepl(String.java:728)
+	at java.base/java.lang.String.newStringNoRepl1(String.java:756)
+	at java.base/java.lang.String.newStringNoRepl(String.java:738)
+	at java.base/java.lang.System$2.newStringNoRepl(System.java:2390)
+	at java.base/java.nio.file.Files.readString(Files.java:3369)
+	at java.base/java.nio.file.Files.readString(Files.java:3325)
+	at yanchuk.autodiagnosticcenter.writer.JsonTransportWriterTest.testInvalidTransportSuccessfulWriting(JsonTransportWriterTest.java:30)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
