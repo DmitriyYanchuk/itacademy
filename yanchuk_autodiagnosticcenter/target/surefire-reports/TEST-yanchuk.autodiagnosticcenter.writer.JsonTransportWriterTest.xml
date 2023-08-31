@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="yanchuk.autodiagnosticcenter.writer.JsonTransportWriterTest" time="0.113" tests="6" errors="1" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1251"/>
+    <property name="java.class.path" value="D:\codes\Enterprise\yanchuk_autodiagnosticcenter\target\test-classes;D:\codes\Enterprise\yanchuk_autodiagnosticcenter\target\classes;C:\Users\nices\.m2\repository\org\json\json\20230618\json-20230618.jar;C:\Users\nices\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\nices\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;C:\Users\nices\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\nices\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\nices\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\nices\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Europe/Moscow"/>
+    <property name="user.country.format" value="BY"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="RU"/>
+    <property name="sun.boot.library.path" value="D:\Java\bin"/>
+    <property name="sun.java.command" value="C:\Users\nices\AppData\Local\Temp\surefire4245137928587507991\surefirebooter-20230828194412131_3.jar C:\Users\nices\AppData\Local\Temp\surefire4245137928587507991 2023-08-28T19-44-11_315-jvmRun1 surefire-20230828194412131_1tmp surefire_0-20230828194412131_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="D:\codes\Enterprise\yanchuk_autodiagnosticcenter\target\test-classes;D:\codes\Enterprise\yanchuk_autodiagnosticcenter\target\classes;C:\Users\nices\.m2\repository\org\json\json\20230618\json-20230618.jar;C:\Users\nices\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\nices\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;C:\Users\nices\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\nices\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\nices\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\nices\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\nices"/>
+    <property name="user.language" value="ru"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2022-10-18"/>
+    <property name="java.home" value="D:\Java"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="D:\codes\Enterprise\yanchuk_autodiagnosticcenter"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\nices\AppData\Local\Temp\surefire4245137928587507991\surefirebooter-20230828194412131_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.5+9-LTS-191"/>
+    <property name="user.name" value="nices"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="Cp1251"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\nices\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\nices\AppData\Local\Temp\"/>
+    <property name="java.version" value="17.0.5"/>
+    <property name="user.dir" value="D:\codes\Enterprise\yanchuk_autodiagnosticcenter"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1251"/>
+    <property name="java.library.path" value="D:\Java\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\Java\bin;C:\Program Files\Git\cmd;C:\Program Files\Maven\bin;D:\Java\bin;C:\Users\nices\AppData\Local\Microsoft\WindowsApps;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="17.0.5+9-LTS-191"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="testProcessedTransportWriterException" classname="yanchuk.autodiagnosticcenter.writer.JsonTransportWriterTest" time="0.002"/>
+  <testcase name="testInvalidTransportSuccessfulWriting" classname="yanchuk.autodiagnosticcenter.writer.JsonTransportWriterTest" time="0.062">
+    <error message="Input length = 1" type="java.nio.charset.MalformedInputException"><![CDATA[java.nio.charset.MalformedInputException: Input length = 1
+	at java.base/java.lang.String.throwMalformed(String.java:1240)
+	at java.base/java.lang.String.decodeUTF8_UTF16(String.java:1191)
+	at java.base/java.lang.String.newStringUTF8NoRepl(String.java:728)
+	at java.base/java.lang.String.newStringNoRepl1(String.java:756)
+	at java.base/java.lang.String.newStringNoRepl(String.java:738)
+	at java.base/java.lang.System$2.newStringNoRepl(System.java:2390)
+	at java.base/java.nio.file.Files.readString(Files.java:3369)
+	at java.base/java.nio.file.Files.readString(Files.java:3325)
+	at yanchuk.autodiagnosticcenter.writer.JsonTransportWriterTest.testInvalidTransportSuccessfulWriting(JsonTransportWriterTest.java:30)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+]]></error>
+    <system-out><![CDATA[Invalid file is created
+]]></system-out>
+  </testcase>
+  <testcase name="testInvalidTransportWriterExceptionFileWriteError" classname="yanchuk.autodiagnosticcenter.writer.JsonTransportWriterTest" time="0.005"/>
+  <testcase name="testProcessedTransportWriterExceptionFileWriteError" classname="yanchuk.autodiagnosticcenter.writer.JsonTransportWriterTest" time="0.003"/>
+  <testcase name="testInvalidTransportWriterException" classname="yanchuk.autodiagnosticcenter.writer.JsonTransportWriterTest" time="0.002"/>
+  <testcase name="testProcessedTransportSuccessfulWriting" classname="yanchuk.autodiagnosticcenter.writer.JsonTransportWriterTest" time="0.005">
+    <system-out><![CDATA[Processed file is created
+D:\codes\Enterprise\yanchuk_autodiagnosticcenter\processed-transport.json
+]]></system-out>
+  </testcase>
+</testsuite>
