@@ -54,7 +54,7 @@ public class JsonTransportWriter implements TransportWriter {
         try (final BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             final List<JSONObject> jsonList = new ArrayList<>();
 
-            for (String transport : objects) {
+            for (final String transport : objects) {
                 final JSONObject jsonObject = new JSONObject();
                 final String[] parts = transport.split("\\,\\s");
                 jsonObject.put("type", parts[0]);

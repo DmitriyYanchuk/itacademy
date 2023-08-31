@@ -21,7 +21,7 @@ class JsonDocumentParserTest {
         comparableList.add("automobile, Mazda CX7");
         comparableList.add("motorbike, Ninja **");
 
-        final JsonDocumentParser jsonParser = new JsonDocumentParser("src/test/java/resources/transport.json");
+        final JsonDocumentParser jsonParser = new JsonDocumentParser("transport.json");
         final List<String> allTransport = jsonParser.parse();
 
         assertNotNull(allTransport, "Array is null");
@@ -30,7 +30,7 @@ class JsonDocumentParserTest {
 
     @Test
     void testJSONParsingFailed() {
-        final JsonDocumentParser jsonParser = new JsonDocumentParser("src/test/java/resources/transportJSONParsingFailed.json");
+        final JsonDocumentParser jsonParser = new JsonDocumentParser("transportJSONParsingFailed.json");
 
         final var exception = assertThrows(DocumentParserException.class, () -> jsonParser.parse());
 

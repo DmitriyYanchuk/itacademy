@@ -5,24 +5,29 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JsonDocumentParser implements DocumentParser {
 
-    private final File content;
+    private final String content;
 
-    public JsonDocumentParser(String name) {
-        this.content = new File(name);
+    public JsonDocumentParser(final String name) {
+        this.content = name;
     }
 
     @Override
-    public List<String> parse() throws DocumentParserException {
-        try {
+    public final List<String> parse() throws DocumentParserException {
+        try (final BufferedReader reader = getReader()) {
             final List<String> allTransport = new ArrayList<>();
-            final String documentStrings = Files.readString(content.toPath());
-            final JSONArray transportArray = new JSONArray(documentStrings);
+            final List<String> documentList = reader.lines().toList();
+            final StringBuilder documentString = new StringBuilder();
+
+            for (final String listStrings : documentList) {
+                documentString.append(listStrings);
+            }
+
+            final JSONArray transportArray = new JSONArray(documentString.toString());
 
             for (int transportIndex = 0; transportIndex <= transportArray.length() - 1; transportIndex++) {
                 final JSONObject transportObject = transportArray.getJSONObject(transportIndex);
@@ -38,5 +43,14 @@ public class JsonDocumentParser implements DocumentParser {
         } catch (final IOException exc) {
             throw new DocumentParserException("File " + content + " not found", exc);
         }
+    }
+
+    private BufferedReader getReader() throws DocumentParserException {
+        final var in = getClass().getClassLoader().getResourceAsStream(content);
+        if (in != null) {
+            return new BufferedReader(new InputStreamReader(in));
+        }
+
+        throw new DocumentParserException("File " + content + " not found");
     }
 }

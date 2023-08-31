@@ -40,7 +40,7 @@ public class TransportSorter implements SortingList {
     }
 
     @Override
-    public final List<String> sorting(List<String> list) throws SortingListException {
+    public final List<String> sorting(final List<String> list) throws SortingListException {
         try {
             Comparator<String> comparator = Comparator.comparing(TransportSorter::getType);
             if (SORTING_ORDER == 2) {

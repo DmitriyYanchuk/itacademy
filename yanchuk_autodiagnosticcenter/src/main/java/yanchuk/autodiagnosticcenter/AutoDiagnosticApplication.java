@@ -12,7 +12,7 @@ public class AutoDiagnosticApplication {
         System.out.println("Start of the working Auto Diagnostic Application");
 
         try {
-            final JsonDocumentParser json = new JsonDocumentParser("src/main/resources/transport.json");
+            final JsonDocumentParser json = new JsonDocumentParser("transport.json");
             final List<String> jsonList = json.parse();
 
             final ListTransportEditor editor = new ListTransportEditor();

@@ -11,7 +11,7 @@ public class ListTransportEditor implements TransportList {
     private static final Predicate<String> MODEL_VALIDATOR = Pattern.compile("^[a-zA-Z]((\\s|-)?[a-zA-Z0-9])*$").asPredicate();
 
     @Override
-    public final List<String> validList(List<String> jsonList) throws ListTransportException {
+    public final List<String> validList(final List<String> jsonList) throws ListTransportException {
         try {
             return jsonList.stream()
                     .map(ListTransportEditor::validObjects)
@@ -24,12 +24,13 @@ public class ListTransportEditor implements TransportList {
     }
 
     @Override
-    public final List<String> invalidList(List<String> jsonList) throws ListTransportException {
+    public final List<String> invalidList(final List<String> jsonList) throws ListTransportException {
         try {
             return jsonList.stream()
                     .map(ListTransportEditor::invalidObjects)
                     .filter(Objects::nonNull)
                     .toList();
+
         } catch (final RuntimeException exc) {
             throw new ListTransportException ("The list being modified does not exist", exc);
         }
@@ -48,8 +49,8 @@ public class ListTransportEditor implements TransportList {
         return transport;
     }
 
-    private static String forValidObjects(String type) {
-        String cost;
+    private static String forValidObjects(final String type) {
+        final String cost;
 
         if (type.equals("motorbike")) {
             cost = ", 10";
@@ -75,11 +76,11 @@ public class ListTransportEditor implements TransportList {
         return transport;
     }
 
-    private static String forInvalidObjects(String transport) {
+    private static String forInvalidObjects(final String transport) {
         return transport + ",  ";
     }
 
-    private static boolean isValid(String transport) {
+    private static boolean isValid(final String transport) {
         final String[] parts = transport.split("\\,\\s");
         final String model = parts[1];
         final boolean isValid = MODEL_VALIDATOR.test(model);
