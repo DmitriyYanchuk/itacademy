@@ -7,36 +7,9 @@ public class TransportSorter implements SortingList {
     private static int SORTING_TYPE;
     private static int SORTING_ORDER;
 
-    public TransportSorter() {
-        final Scanner scan = new Scanner(System.in);
-        boolean exit = false;
-
-        while (!exit) {
-            System.out.println("Select a sort type \n 1 - Car type \n 2 - Car model \n 3 - Maintenance cost");
-            final int sortingType = scan.nextInt();
-            switch (sortingType) {
-                case 1 -> exit = true;
-                case 2 -> exit = true;
-                case 3 -> exit = true;
-                default -> System.out.println("Please enter correct values");
-            }
-
-            if (exit) {
-                System.out.println("Select a sort order \n 1 - Direct \n 2 - Reverse");
-                final int sortingOrder = scan.nextInt();
-                switch (sortingOrder) {
-                    case 1 -> exit = true;
-                    case 2 -> exit = true;
-                    default -> {
-                        exit = false;
-                        System.out.println("Please enter correct values");
-                    }
-                }
-
-                this.SORTING_ORDER = sortingOrder;
-                this.SORTING_TYPE = sortingType;
-            }
-        }
+    public TransportSorter(final int sortingType, final int sortingOrder) {
+        SORTING_TYPE = sortingType;
+        SORTING_ORDER = sortingOrder;
     }
 
     @Override

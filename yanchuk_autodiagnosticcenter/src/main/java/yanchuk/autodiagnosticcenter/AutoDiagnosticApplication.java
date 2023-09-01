@@ -2,6 +2,7 @@ package yanchuk.autodiagnosticcenter;
 
 import yanchuk.autodiagnosticcenter.parser.JsonDocumentParser;
 import yanchuk.autodiagnosticcenter.editor.ListTransportEditor;
+import yanchuk.autodiagnosticcenter.sorter.ConsoleSortingParameters;
 import yanchuk.autodiagnosticcenter.sorter.TransportSorter;
 import yanchuk.autodiagnosticcenter.writer.JsonTransportWriter;
 
@@ -19,7 +20,11 @@ public class AutoDiagnosticApplication {
             final List<String> validTransport = editor.validList(jsonList);
             final List<String> invalidTransport = editor.invalidList(jsonList);
 
-            final TransportSorter sorter = new TransportSorter();
+            final ConsoleSortingParameters parameters = new ConsoleSortingParameters();
+            final int sortingType = parameters.sortingType();
+            final int sortingOrder = parameters.sortingOrder();
+
+            final TransportSorter sorter = new TransportSorter(sortingType, sortingOrder);
             final List<String> sortedTransport = sorter.sorting(validTransport);
 
             final JsonTransportWriter writer = new JsonTransportWriter("processed-transport.json", "invalid-transport.json");
