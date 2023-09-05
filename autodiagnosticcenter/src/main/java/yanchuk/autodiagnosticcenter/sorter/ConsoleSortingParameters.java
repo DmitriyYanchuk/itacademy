@@ -11,7 +11,7 @@ public class ConsoleSortingParameters implements ConsoleSorting {
     }
 
     @Override
-    public int sortingType() {
+    public final int sortingType() {
         int sortingType;
 
         for (; ; ) {
@@ -28,7 +28,7 @@ public class ConsoleSortingParameters implements ConsoleSorting {
     }
 
     @Override
-    public int sortingOrder() {
+    public final int sortingOrder() {
         int sortingOrder;
 
         for (; ; ) {

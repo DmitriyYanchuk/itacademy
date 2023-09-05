@@ -8,6 +8,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class JsonDocumentParser implements DocumentParser {
 
@@ -38,16 +39,9 @@ public class JsonDocumentParser implements DocumentParser {
     }
 
     private String getContent() throws DocumentParserException {
-        final var in = getClass().getClassLoader().getResourceAsStream(content);
+        final InputStream in = getClass().getClassLoader().getResourceAsStream(content);
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
-            final List<String> documentList = reader.lines().toList();
-            final StringBuilder documentString = new StringBuilder();
-
-            for (final String listStrings : documentList) {
-                documentString.append(listStrings);
-            }
-
-            return documentString.toString();
+            return reader.lines().collect(Collectors.joining());
         } catch (final Exception exc) {
             throw new DocumentParserException("Reading file error", exc);
         }

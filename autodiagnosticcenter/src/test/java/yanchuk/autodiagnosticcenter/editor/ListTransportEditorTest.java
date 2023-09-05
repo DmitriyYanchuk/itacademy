@@ -50,7 +50,7 @@ class ListTransportEditorTest {
     void testProcessedTransportListIsNullThrowsException() {
         final ListTransportEditor editor = new ListTransportEditor();
 
-        final var exception = assertThrows(ListTransportException.class, () -> editor.processedList(null));
+        final Throwable exception = assertThrows(ListTransportException.class, () -> editor.processedList(null));
 
         assertNotNull(exception, "ListTransportException is null");
         assertEquals("The list being modified does not exist", exception.getMessage());
@@ -60,7 +60,7 @@ class ListTransportEditorTest {
     void testInvalidTransportListIsNullThrowsException() {
         final ListTransportEditor editor = new ListTransportEditor();
 
-        final var exception = assertThrows(ListTransportException.class, () -> editor.invalidList(null));
+        final Throwable exception = assertThrows(ListTransportException.class, () -> editor.invalidList(null));
 
         assertNotNull(exception, "ListTransportException is null");
         assertEquals("The list being modified does not exist", exception.getMessage());

@@ -32,7 +32,7 @@ class JsonDocumentParserTest {
     void testJSONParsingFailedThrowsJSONException() {
         final JsonDocumentParser jsonParser = new JsonDocumentParser("transportJSONParsingFailed.json");
 
-        final var exception = assertThrows(DocumentParserException.class, jsonParser::parse);
+        final Throwable exception = assertThrows(DocumentParserException.class, jsonParser::parse);
 
         assertNotNull(exception, "DocumentParserException is null");
         assertEquals("JSON parsing failed", exception.getMessage());
@@ -42,7 +42,7 @@ class JsonDocumentParserTest {
     void testJSONParsingGetContentThrowsReadingException() {
         final JsonDocumentParser jsonParser = new JsonDocumentParser("cars.json");
 
-        final var exception = assertThrows(DocumentParserException.class, jsonParser::parse);
+        final Throwable exception = assertThrows(DocumentParserException.class, jsonParser::parse);
 
         assertNotNull(exception, "DocumentParserException is null");
         assertEquals("Reading file error", exception.getMessage());

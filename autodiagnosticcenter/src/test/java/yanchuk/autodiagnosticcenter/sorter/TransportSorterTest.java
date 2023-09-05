@@ -34,7 +34,7 @@ class TransportSorterTest {
     void testSortingTransportListIsNullThrowsException() {
         final TransportSorter sorter = new TransportSorter(1,1);
 
-        final var exception = assertThrows(SortingListException.class, () -> sorter.sorting(null));
+        final Throwable exception = assertThrows(SortingListException.class, () -> sorter.sorting(null));
 
         assertNotNull(exception, "ListTransportException is null");
         assertEquals("Sorting error", exception.getMessage());

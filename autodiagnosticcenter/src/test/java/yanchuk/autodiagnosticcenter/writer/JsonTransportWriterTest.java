@@ -2,15 +2,13 @@ package yanchuk.autodiagnosticcenter.writer;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,14 +20,9 @@ class JsonTransportWriterTest {
         invalidTransportList.add("automobile, Audi Q9!№,  ");
         invalidTransportList.add("motorbike, Ninja **,  ");
 
-        final var on = getClass().getClassLoader().getResourceAsStream("comparableInvalidFile.json");
+        final InputStream on = getClass().getClassLoader().getResourceAsStream("comparableInvalidFile.json");
         final BufferedReader comparableReader = new BufferedReader(new InputStreamReader(on, StandardCharsets.UTF_8));
-        final List<String> comparableList = comparableReader.lines().toList();
-        final StringBuilder comparableString = new StringBuilder();
-
-        for (final String listStrings : comparableList) {
-            comparableString.append(listStrings);
-        }
+        final String comparableString = comparableReader.lines().collect(Collectors.joining());
 
         final String fileName = "invalid-transport.json";
         final File invalidTransport = new File(fileName);
@@ -39,7 +32,7 @@ class JsonTransportWriterTest {
         final String invalidString = Files.readString(Path.of(fileName));
 
         assertNotNull(invalidTransport, "File is null");
-        assertEquals(invalidString, comparableString.toString());
+        assertEquals(invalidString, comparableString);
     }
 
     @Test
@@ -48,14 +41,9 @@ class JsonTransportWriterTest {
         processedTransportList.add("automobile, Audi Q7, 20");
         processedTransportList.add("motorbike, Ninja ZX-14, 10");
 
-        final var on = getClass().getClassLoader().getResourceAsStream("comparableProcessedFile.json");
+        final InputStream on = getClass().getClassLoader().getResourceAsStream("comparableProcessedFile.json");
         final BufferedReader comparableReader = new BufferedReader(new InputStreamReader(on, StandardCharsets.UTF_8));
-        final List<String> comparableList = comparableReader.lines().toList();
-        final StringBuilder comparableString = new StringBuilder();
-
-        for (final String listStrings : comparableList) {
-            comparableString.append(listStrings);
-        }
+        final String comparableString = comparableReader.lines().collect(Collectors.joining());
 
         final String fileName = "processed-transport.json";
         final File invalidTransport = new File(fileName);
@@ -65,14 +53,14 @@ class JsonTransportWriterTest {
         final String invalidString = Files.readString(Path.of(fileName));
 
         assertNotNull(invalidTransport, "File is null");
-        assertEquals(invalidString, comparableString.toString());
+        assertEquals(invalidString, comparableString);
     }
 
     @Test
     void testWritingInvalidTransportIsNullThrowsException() {
         final JsonTransportWriter writer = new JsonTransportWriter("processed-transport.json", "invalid-transport.json");
 
-        final var exception = assertThrows(TransportWriterException.class, () -> writer.invalidTransport(null));
+        final Throwable exception = assertThrows(TransportWriterException.class, () -> writer.invalidTransport(null));
 
         assertNotNull(exception, "TransportWriterException is null");
         assertEquals("The list being modified does not exist", exception.getMessage());
@@ -82,7 +70,7 @@ class JsonTransportWriterTest {
     void testWritingProcessedTransportIsNullThrowsException() {
         final JsonTransportWriter writer = new JsonTransportWriter("processed-transport.json", "invalid-transport.json");
 
-        final var exception = assertThrows(TransportWriterException.class, () -> writer.processedTransport(null));
+        final Throwable exception = assertThrows(TransportWriterException.class, () -> writer.processedTransport(null));
 
         assertNotNull(exception, "TransportWriterException is null");
         assertEquals("The list being modified does not exist", exception.getMessage());
@@ -96,7 +84,7 @@ class JsonTransportWriterTest {
 
         final JsonTransportWriter writer = new JsonTransportWriter("processed-transport.json", "cars/invalid-transport.json");
 
-        final var exception = assertThrows(TransportWriterException.class, () -> writer.invalidTransport(invalidTransportList));
+        final Throwable exception = assertThrows(TransportWriterException.class, () -> writer.invalidTransport(invalidTransportList));
 
         assertNotNull(exception, "TransportWriterException is null");
         assertEquals("File write error", exception.getMessage());
@@ -110,7 +98,7 @@ class JsonTransportWriterTest {
 
         final JsonTransportWriter writer = new JsonTransportWriter("cars/processed-transport.json", "invalid-transport.json");
 
-        final var exception = assertThrows(TransportWriterException.class, () -> writer.processedTransport(processedTransportList));
+        final Throwable exception = assertThrows(TransportWriterException.class, () -> writer.processedTransport(processedTransportList));
 
         assertNotNull(exception, "TransportWriterException is null");
         assertEquals("File write error", exception.getMessage());
