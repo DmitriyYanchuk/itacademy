@@ -12,37 +12,16 @@ import java.util.List;
 
 public class JsonTransportWriter implements TransportWriter {
 
-    private final File processedTransportFile;
-    private final File invalidTransportFile;
-
-    public JsonTransportWriter(final String processedTransportFile, final String invalidTransportFile) {
-        this.processedTransportFile = new File(processedTransportFile);
-        this.invalidTransportFile = new File(invalidTransportFile);
-    }
-
     @Override
-    public void invalidTransport(final List<String> invalidList) throws TransportWriterException {
+    public void writeTransportFile(final List<String> transportList, final String fileName) throws TransportWriterException {
         try {
-            if (invalidList.isEmpty()) {
-                System.out.println("File with invalid transport is empty");
+            if (transportList.isEmpty()) {
+                System.out.println("File with " + fileName + " transport is empty");
             } else {
-                write(invalidTransportFile, invalidList);
-                System.out.println("Invalid file is created");
-            }
-        } catch (final RuntimeException exc) {
-            throw new TransportWriterException("The list being modified does not exist", exc);
-        }
-    }
-
-    @Override
-    public void processedTransport(final List<String> processedList) throws TransportWriterException {
-        try {
-            if (processedList.isEmpty()) {
-                System.out.println("Not valid transport in file");
-            } else {
-                write(processedTransportFile, processedList);
-                System.out.println("Processed file is created");
-                System.out.println(processedTransportFile.getAbsolutePath());
+                final File transportFile = new File(fileName);
+                write(transportFile, transportList);
+                System.out.println(fileName + " file is created");
+                System.out.println(transportFile.getAbsolutePath());
             }
         } catch (final RuntimeException exc) {
             throw new TransportWriterException("The list being modified does not exist", exc);

@@ -27,8 +27,8 @@ class JsonTransportWriterTest {
         final String fileName = "invalid-transport.json";
         final File invalidTransport = new File(fileName);
 
-        final JsonTransportWriter writer = new JsonTransportWriter("processed-transport.json", fileName);
-        writer.invalidTransport(invalidTransportList);
+        final JsonTransportWriter writer = new JsonTransportWriter();
+        writer.writeTransportFile(invalidTransportList, fileName);
         final String invalidString = Files.readString(Path.of(fileName));
 
         assertNotNull(invalidTransport, "File is null");
@@ -48,8 +48,8 @@ class JsonTransportWriterTest {
         final String fileName = "processed-transport.json";
         final File invalidTransport = new File(fileName);
 
-        final JsonTransportWriter writer = new JsonTransportWriter(fileName, "invalid-transport.json");
-        writer.processedTransport(processedTransportList);
+        final JsonTransportWriter writer = new JsonTransportWriter();
+        writer.writeTransportFile(processedTransportList, fileName);
         final String invalidString = Files.readString(Path.of(fileName));
 
         assertNotNull(invalidTransport, "File is null");
@@ -57,48 +57,26 @@ class JsonTransportWriterTest {
     }
 
     @Test
-    void testWritingInvalidTransportIsNullThrowsException() {
-        final JsonTransportWriter writer = new JsonTransportWriter("processed-transport.json", "invalid-transport.json");
+    void testWritingTransportFileIsNullThrowsException() {
+        final JsonTransportWriter writer = new JsonTransportWriter();
 
-        final Throwable exception = assertThrows(TransportWriterException.class, () -> writer.invalidTransport(null));
-
-        assertNotNull(exception, "TransportWriterException is null");
-        assertEquals("The list being modified does not exist", exception.getMessage());
-    }
-
-    @Test
-    void testWritingProcessedTransportIsNullThrowsException() {
-        final JsonTransportWriter writer = new JsonTransportWriter("processed-transport.json", "invalid-transport.json");
-
-        final Throwable exception = assertThrows(TransportWriterException.class, () -> writer.processedTransport(null));
+        final Throwable exception = assertThrows(TransportWriterException.class,
+                () -> writer.writeTransportFile(null, "transportFile.json"));
 
         assertNotNull(exception, "TransportWriterException is null");
         assertEquals("The list being modified does not exist", exception.getMessage());
     }
 
     @Test
-    void testWritingInvalidTransportFileWriteException() {
-        final List<String> invalidTransportList = new ArrayList<>();
-        invalidTransportList.add("automobile, Audi Q9!№,  ");
-        invalidTransportList.add("motorbike, Ninja **,  ");
+    void testWritingTransportFileFileWriteException() {
+        final List<String> transportList = new ArrayList<>();
+        transportList.add("automobile, Audi Q9!№,  ");
+        transportList.add("motorbike, Ninja **,  ");
 
-        final JsonTransportWriter writer = new JsonTransportWriter("processed-transport.json", "cars/invalid-transport.json");
+        final JsonTransportWriter writer = new JsonTransportWriter();
 
-        final Throwable exception = assertThrows(TransportWriterException.class, () -> writer.invalidTransport(invalidTransportList));
-
-        assertNotNull(exception, "TransportWriterException is null");
-        assertEquals("File write error", exception.getMessage());
-    }
-
-    @Test
-    void testWritingProcessedTransportFileWriteException() {
-        final List<String> processedTransportList = new ArrayList<>();
-        processedTransportList.add("automobile, Audi Q7, 20");
-        processedTransportList.add("motorbike, Ninja ZX-14, 10");
-
-        final JsonTransportWriter writer = new JsonTransportWriter("cars/processed-transport.json", "invalid-transport.json");
-
-        final Throwable exception = assertThrows(TransportWriterException.class, () -> writer.processedTransport(processedTransportList));
+        final Throwable exception = assertThrows(TransportWriterException.class,
+                () -> writer.writeTransportFile(transportList, "cars/invalid-transport.json"));
 
         assertNotNull(exception, "TransportWriterException is null");
         assertEquals("File write error", exception.getMessage());
