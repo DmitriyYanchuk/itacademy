@@ -1,8 +1,9 @@
 package yanchuk.autodiagnosticcenter;
 
+import yanchuk.autodiagnosticcenter.console.ConsoleSorting;
 import yanchuk.autodiagnosticcenter.parser.JsonDocumentParser;
 import yanchuk.autodiagnosticcenter.editor.ListTransportEditor;
-import yanchuk.autodiagnosticcenter.sorter.ConsoleSortingParameters;
+import yanchuk.autodiagnosticcenter.console.ConsoleSortingParameters;
 import yanchuk.autodiagnosticcenter.sorter.TransportSorter;
 import yanchuk.autodiagnosticcenter.writer.JsonTransportWriter;
 
@@ -20,7 +21,8 @@ public class AutoDiagnosticApplication {
             final List<String> processedTransport = editor.processedList(jsonList);
             final List<String> invalidTransport = editor.invalidList(jsonList);
 
-            final ConsoleSortingParameters parameters = new ConsoleSortingParameters();
+            final ConsoleSorting consoleSorting = new ConsoleSorting();
+            final ConsoleSortingParameters parameters = new ConsoleSortingParameters(consoleSorting);
             final int sortingType = parameters.sortingType();
             final int sortingOrder = parameters.sortingOrder();
 

@@ -1,13 +1,11 @@
-package yanchuk.autodiagnosticcenter.sorter;
+package yanchuk.autodiagnosticcenter.console;
 
-import java.util.Scanner;
+public class ConsoleSortingParameters implements ConsoleParameters {
 
-public class ConsoleSortingParameters implements ConsoleSorting {
+    private final ConsoleSorting consoleSorting;
 
-    private final Scanner scan;
-
-    public ConsoleSortingParameters() {
-        this.scan = new Scanner(System.in);
+    public ConsoleSortingParameters(final ConsoleSorting consoleSorting) {
+        this.consoleSorting = consoleSorting;
     }
 
     @Override
@@ -16,7 +14,7 @@ public class ConsoleSortingParameters implements ConsoleSorting {
 
         for (; ; ) {
             System.out.println("Select a sort type \n 1 - Car type \n 2 - Car model \n 3 - Maintenance cost");
-            sortingType = scan.nextInt();
+            sortingType = consoleSorting.nextInt();
 
             if (sortingType == 1 || sortingType == 2 || sortingType == 3) {
                 break;
@@ -33,7 +31,7 @@ public class ConsoleSortingParameters implements ConsoleSorting {
 
         for (; ; ) {
             System.out.println("Select a sort order \n 1 - Direct \n 2 - Reverse");
-            sortingOrder = scan.nextInt();
+            sortingOrder = consoleSorting.nextInt();
 
             if (sortingOrder == 1 || sortingOrder == 2) {
                 break;
