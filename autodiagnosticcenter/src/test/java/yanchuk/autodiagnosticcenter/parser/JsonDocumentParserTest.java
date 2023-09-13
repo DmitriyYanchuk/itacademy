@@ -1,6 +1,7 @@
 package yanchuk.autodiagnosticcenter.parser;
 
 import org.junit.jupiter.api.Test;
+import yanchuk.autodiagnosticcenter.transport.Transport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ class JsonDocumentParserTest {
         comparableList.add("motorbike, Ninja **");
 
         final JsonDocumentParser jsonParser = new JsonDocumentParser("transport.json");
-        final List<String> allTransport = jsonParser.parse();
+        final List<Transport> allTransport = jsonParser.parse();
 
         assertNotNull(allTransport, "Array is null");
         assertEquals(allTransport, comparableList);

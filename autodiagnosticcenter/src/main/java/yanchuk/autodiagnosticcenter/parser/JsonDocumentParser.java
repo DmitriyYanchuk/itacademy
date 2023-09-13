@@ -3,6 +3,7 @@ package yanchuk.autodiagnosticcenter.parser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import yanchuk.autodiagnosticcenter.transport.Transport;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -19,16 +20,16 @@ public class JsonDocumentParser implements DocumentParser {
     }
 
     @Override
-    public final List<String> parse() throws DocumentParserException {
+    public final List<Transport> parse() throws DocumentParserException {
         try {
-            final List<String> allTransport = new ArrayList<>();
+            final List<Transport> allTransport = new ArrayList<>();
             final JSONArray transportArray = new JSONArray(getContent());
 
             for (int transportIndex = 0; transportIndex <= transportArray.length() - 1; transportIndex++) {
                 final JSONObject transportObject = transportArray.getJSONObject(transportIndex);
                 final String type = transportObject.getString("type");
                 final String model = transportObject.getString("model");
-                final String transport = type + ", " + model;
+                final Transport transport = new Transport(type, model);
                 allTransport.add(transport);
             }
 

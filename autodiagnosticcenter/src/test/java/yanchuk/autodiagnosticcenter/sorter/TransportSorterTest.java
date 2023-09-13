@@ -36,7 +36,7 @@ class TransportSorterTest {
 
         final Throwable exception = assertThrows(SortingListException.class, () -> sorter.sorting(null));
 
-        assertNotNull(exception, "ListTransportException is null");
+        assertNotNull(exception, "ProcessorException is null");
         assertEquals("Sorting error", exception.getMessage());
     }
 }

@@ -2,12 +2,15 @@ package yanchuk.autodiagnosticcenter;
 
 import yanchuk.autodiagnosticcenter.console.ConsoleParameters;
 import yanchuk.autodiagnosticcenter.console.ConsoleSorting;
-import yanchuk.autodiagnosticcenter.editor.TransportList;
+import yanchuk.autodiagnosticcenter.processor.Processor;
 import yanchuk.autodiagnosticcenter.parser.DocumentParser;
 import yanchuk.autodiagnosticcenter.parser.JsonDocumentParser;
-import yanchuk.autodiagnosticcenter.editor.ListTransportEditor;
+import yanchuk.autodiagnosticcenter.processor.TransportProcessor;
 import yanchuk.autodiagnosticcenter.console.ConsoleSortingParameters;
 import yanchuk.autodiagnosticcenter.sorter.TransportSorter;
+import yanchuk.autodiagnosticcenter.transport.Transport;
+import yanchuk.autodiagnosticcenter.validator.ParameterValidationProcessor;
+import yanchuk.autodiagnosticcenter.validator.ValidationProcessor;
 import yanchuk.autodiagnosticcenter.writer.JsonTransportWriter;
 import yanchuk.autodiagnosticcenter.writer.TransportWriter;
 
@@ -19,11 +22,15 @@ public class AutoDiagnosticApplication {
 
         try {
             final DocumentParser json = new JsonDocumentParser("transport.json");
-            final List<String> jsonList = json.parse();
+            final List<Transport> jsonList = json.parse();
 
-            final TransportList editor = new ListTransportEditor();
-            final List<String> processedTransport = editor.processedList(jsonList);
-            final List<String> invalidTransport = editor.invalidList(jsonList);
+            final ValidationProcessor validationProcessor = new ParameterValidationProcessor();
+            final List<Transport> processedTransport = validationProcessor.processedTransportList(jsonList);
+            final List<Transport> invalidTransport = validationProcessor.invalidTransportList(jsonList);
+
+            final Processor processor = new TransportProcessor();
+            final List<String> processedStringTransport = processor.processedStringList(processedTransport);
+            final List<String> invalidStringTransport = processor.invalidStringList(invalidTransport);
 
             final ConsoleSorting consoleSorting = new ConsoleSorting();
             final ConsoleParameters parameters = new ConsoleSortingParameters(consoleSorting);
@@ -31,11 +38,11 @@ public class AutoDiagnosticApplication {
             final int sortingOrder = parameters.sortingOrder();
 
             final TransportSorter sorter = new TransportSorter(sortingType, sortingOrder);
-            final List<String> sortedTransport = sorter.sorting(processedTransport);
+            final List<String> sortedTransport = sorter.sorting(processedStringTransport);
 
             final TransportWriter writer = new JsonTransportWriter();
             writer.writeTransportFile(sortedTransport, "processed-transport.json");
-            writer.writeTransportFile(invalidTransport, "invalid-transport.json");
+            writer.writeTransportFile(invalidStringTransport, "invalid-transport.json");
 
         } catch (final Exception exc) {
             System.err.println("Program error " + exc.getMessage());
