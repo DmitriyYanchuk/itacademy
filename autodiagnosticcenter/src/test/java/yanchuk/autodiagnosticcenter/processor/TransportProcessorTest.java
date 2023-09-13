@@ -21,10 +21,10 @@ class TransportProcessorTest {
         comparableList.add("automobile, Audi Q7, 20");
 
         final Processor processor = new TransportProcessor();
-        final List<String> validList = processor.processedStringList(transportList);
+        final List<String> processedList = processor.processProcessedTransport(transportList);
 
-        assertNotNull(validList, "Array is null");
-        assertEquals(validList, comparableList);
+        assertNotNull(processedList, "Array is null");
+        assertEquals(processedList, comparableList);
     }
 
     @Test
@@ -38,7 +38,7 @@ class TransportProcessorTest {
         comparableList.add("motorbike, Ninja **,  ");
 
         final Processor processor = new TransportProcessor();
-        final List<String> invalidList = processor.invalidStringList(transportList);
+        final List<String> invalidList = processor.processInvalidTransport(transportList);
 
         assertNotNull(invalidList, "Array is null");
         assertEquals(invalidList, comparableList);
@@ -49,7 +49,7 @@ class TransportProcessorTest {
         final Processor processor = new TransportProcessor();
 
         final Throwable exception = assertThrows(ProcessorException.class,
-                () -> processor.processedStringList(null));
+                () -> processor.processProcessedTransport(null));
 
         assertNotNull(exception, "ProcessorException is null");
         assertEquals("The list being modified does not exist", exception.getMessage());
@@ -60,7 +60,7 @@ class TransportProcessorTest {
         final Processor processor = new TransportProcessor();
 
         final Throwable exception = assertThrows(ProcessorException.class,
-                () -> processor.invalidStringList(null));
+                () -> processor.processInvalidTransport(null));
 
         assertNotNull(exception, "ProcessorException is null");
         assertEquals("The list being modified does not exist", exception.getMessage());

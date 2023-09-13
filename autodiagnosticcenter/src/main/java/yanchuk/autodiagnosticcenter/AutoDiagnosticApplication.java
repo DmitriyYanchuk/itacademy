@@ -25,12 +25,16 @@ public class AutoDiagnosticApplication {
             final List<Transport> jsonList = json.parse();
 
             final ValidationProcessor validationProcessor = new ParameterValidationProcessor();
-            final List<Transport> processedTransport = validationProcessor.processedTransportList(jsonList);
-            final List<Transport> invalidTransport = validationProcessor.invalidTransportList(jsonList);
+            final List<Transport> approvedProcessedTransport =
+                    validationProcessor.validateProcessedTransport(jsonList);
+            final List<Transport> approvedInvalidTransport =
+                    validationProcessor.validateInvalidTransport(jsonList);
 
             final Processor processor = new TransportProcessor();
-            final List<String> processedStringTransport = processor.processedStringList(processedTransport);
-            final List<String> invalidStringTransport = processor.invalidStringList(invalidTransport);
+            final List<String> modifiedProcessedTransport =
+                    processor.processProcessedTransport(approvedProcessedTransport);
+            final List<String> modifiedInvalidTransport =
+                    processor.processInvalidTransport(approvedInvalidTransport);
 
             final ConsoleSorting consoleSorting = new ConsoleSorting();
             final ConsoleParameters parameters = new ConsoleSortingParameters(consoleSorting);
@@ -38,11 +42,11 @@ public class AutoDiagnosticApplication {
             final int sortingOrder = parameters.sortingOrder();
 
             final TransportSorter sorter = new TransportSorter(sortingType, sortingOrder);
-            final List<String> sortedTransport = sorter.sorting(processedStringTransport);
+            final List<String> sortedTransport = sorter.sorting(modifiedProcessedTransport);
 
             final TransportWriter writer = new JsonTransportWriter();
             writer.writeTransportFile(sortedTransport, "processed-transport.json");
-            writer.writeTransportFile(invalidStringTransport, "invalid-transport.json");
+            writer.writeTransportFile(modifiedInvalidTransport, "invalid-transport.json");
 
         } catch (final Exception exc) {
             System.err.println("Program error " + exc.getMessage());

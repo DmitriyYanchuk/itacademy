@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface Processor {
 
-    List<String> processedStringList(List<Transport> transport) throws ProcessorException;
-    List<String> invalidStringList(List<Transport> transport) throws ProcessorException;
+    List<String> processProcessedTransport(List<Transport> transport) throws ProcessorException;
+    List<String> processInvalidTransport(List<Transport> transport) throws ProcessorException;
 }

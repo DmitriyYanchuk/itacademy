@@ -14,8 +14,8 @@ import java.util.regex.Pattern;
 public class ParameterValidationProcessor implements ValidationProcessor {
 
     @Override
-    public final List<Transport> processedTransportList(final List<Transport> transport) throws ValidationProcessorException {
-        return transportProcess(transport, transport1 -> {
+    public final List<Transport> validateProcessedTransport(final List<Transport> transport) throws ValidationProcessorException {
+        return validateTransport(transport, transport1 -> {
             try {
                 return validTransport(transport1);
             } catch (ValidationProcessorException e) {
@@ -25,8 +25,8 @@ public class ParameterValidationProcessor implements ValidationProcessor {
     }
 
     @Override
-    public final List<Transport> invalidTransportList(final List<Transport> transport) throws ValidationProcessorException {
-        return transportProcess(transport, transport1 -> {
+    public final List<Transport> validateInvalidTransport(final List<Transport> transport) throws ValidationProcessorException {
+        return validateTransport(transport, transport1 -> {
             try {
                 return invalidTransport(transport1);
             } catch (ValidationProcessorException e) {
@@ -35,7 +35,7 @@ public class ParameterValidationProcessor implements ValidationProcessor {
         });
     }
 
-    private List<Transport> transportProcess(
+    private List<Transport> validateTransport(
             final List<Transport> transport,
             final Function<Transport, Transport> convert
     ) {

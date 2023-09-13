@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ValidationProcessor {
 
-    List<Transport> processedTransportList(List<Transport> transport) throws ValidationProcessorException;
+    List<Transport> validateProcessedTransport(List<Transport> transport) throws ValidationProcessorException;
 
-    List<Transport> invalidTransportList(List<Transport> transport) throws ValidationProcessorException;
+    List<Transport> validateInvalidTransport(List<Transport> transport) throws ValidationProcessorException;
 }

@@ -8,20 +8,20 @@ import java.util.function.Function;
 public class TransportProcessor implements Processor {
 
     @Override
-    public final List<String> processedStringList(final List<Transport> transport) throws ProcessorException {
+    public final List<String> processProcessedTransport(final List<Transport> transport) throws ProcessorException {
         if (transport == null) {
             throw new ProcessorException("The list being modified does not exist");
         } else {
-            return process(transport, TransportProcessor::forValidTransport);
+            return process(transport, TransportProcessor::processedTransport);
         }
     }
 
     @Override
-    public final List<String> invalidStringList(final List<Transport> transport) throws ProcessorException {
+    public final List<String> processInvalidTransport(final List<Transport> transport) throws ProcessorException {
         if (transport == null) {
             throw new ProcessorException("The list being modified does not exist");
         } else {
-            return process(transport, TransportProcessor::forInvalidTransport);
+            return process(transport, TransportProcessor::invalidTransport);
         }
     }
 
@@ -31,7 +31,7 @@ public class TransportProcessor implements Processor {
                 .toList();
     }
 
-    private static String forValidTransport(final Transport transport) {
+    private static String processedTransport(final Transport transport) {
         final String cost;
         final String type = transport.getType();
 
@@ -49,7 +49,7 @@ public class TransportProcessor implements Processor {
         return type + ", " + transport.getModel() + cost;
     }
 
-    private static String forInvalidTransport(final Transport transport) {
+    private static String invalidTransport(final Transport transport) {
         return transport.getType() + ", " + transport.getModel() + ",  ";
     }
 }
