@@ -24,9 +24,15 @@ class JsonDocumentParserTest {
 
         final JsonDocumentParser jsonParser = new JsonDocumentParser("transport.json");
         final List<Transport> allTransport = jsonParser.parse();
+        final List<String> actualList = new ArrayList<>();
+
+        for (final Transport transport : allTransport) {
+            final String actual = transport.getType() + ", " + transport.getModel();
+            actualList.add(actual);
+        }
 
         assertNotNull(allTransport, "Array is null");
-        assertEquals(allTransport, comparableList);
+        assertEquals(actualList, comparableList);
     }
 
     @Test

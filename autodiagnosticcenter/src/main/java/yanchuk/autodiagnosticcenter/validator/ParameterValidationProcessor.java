@@ -5,52 +5,36 @@ import yanchuk.autodiagnosticcenter.transport.Transport;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class ParameterValidationProcessor implements ValidationProcessor {
 
     @Override
-    public final List<Transport> validateProcessedTransport(final List<Transport> transport) throws ValidationProcessorException {
-        return validateTransport(transport, transport1 -> {
-            try {
-                return validTransport(transport1);
-            } catch (ValidationProcessorException e) {
-                throw new RuntimeException(e);
-            }
-        });
+    public final List<Transport> validateProcessedTransport(final List<Transport> transports) throws ValidationProcessorException {
+        return validateTransport(transports, true);
     }
 
     @Override
-    public final List<Transport> validateInvalidTransport(final List<Transport> transport) throws ValidationProcessorException {
-        return validateTransport(transport, transport1 -> {
-            try {
-                return invalidTransport(transport1);
-            } catch (ValidationProcessorException e) {
-                throw new RuntimeException(e);
-            }
-        });
+    public final List<Transport> validateInvalidTransport(final List<Transport> transports) throws ValidationProcessorException {
+        return validateTransport(transports, false);
     }
 
     private List<Transport> validateTransport(
-            final List<Transport> transport,
-            final Function<Transport, Transport> convert
-    ) {
-        return transport.stream()
-                .map(convert)
-                .filter(Objects::nonNull)
-                .toList();
-    }
+            final List<Transport> transports,
+            final boolean verifyValid
+    ) throws ValidationProcessorException {
+        final List<Transport> validatedTransport = new ArrayList<>(transports.size());
 
-    private static Transport invalidTransport(final Transport transport) throws ValidationProcessorException {
-        return isValid(transport) ? null : transport;
-    }
+        for (final Transport transport : transports) {
+            if (verifyValid == isValid(transport)) {
+                validatedTransport.add(transport);
+            }
+        }
 
-    private static Transport validTransport(final Transport transport) throws ValidationProcessorException {
-        return !isValid(transport) ? null : transport;
+        return validatedTransport;
     }
 
     private static boolean isValid(final Transport transport) throws ValidationProcessorException {

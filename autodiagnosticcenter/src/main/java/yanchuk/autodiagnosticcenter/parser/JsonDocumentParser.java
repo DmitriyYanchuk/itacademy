@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 
 public class JsonDocumentParser implements DocumentParser {
 
-    private final String content;
+    private final String fileName;
 
     public JsonDocumentParser(final String name) {
-        this.content = name;
+        this.fileName = name;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class JsonDocumentParser implements DocumentParser {
     }
 
     private String getContent() throws DocumentParserException {
-        final InputStream in = getClass().getClassLoader().getResourceAsStream(content);
+        final InputStream in = getClass().getClassLoader().getResourceAsStream(fileName);
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
             return reader.lines().collect(Collectors.joining());
         } catch (final Exception exc) {
