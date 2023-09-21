@@ -1,7 +1,8 @@
-package yanchuk.autodiagnosticcenter.parser;
+package by.itacademy.parser.impl;
 
+import by.itacademy.parser.DocumentParserException;
+import by.itacademy.transport.Transport;
 import org.junit.jupiter.api.Test;
-import yanchuk.autodiagnosticcenter.transport.Transport;
 
 import java.util.ArrayList;
 import java.util.List;

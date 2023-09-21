@@ -1,7 +1,9 @@
-package yanchuk.autodiagnosticcenter.validator;
+package by.itacademy.validator.impl;
 
+import by.itacademy.transport.Transport;
+import by.itacademy.validator.ValidationProcessor;
+import by.itacademy.validator.ValidationProcessorException;
 import org.junit.jupiter.api.Test;
-import yanchuk.autodiagnosticcenter.transport.Transport;
 
 import java.util.ArrayList;
 import java.util.List;

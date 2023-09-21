@@ -1,6 +1,6 @@
-package yanchuk.autodiagnosticcenter.transport;
+package by.itacademy.transport;
 
-import yanchuk.autodiagnosticcenter.annotations.Parameter;
+import by.itacademy.annotation.Parameter;
 
 import java.util.Objects;
 
@@ -10,7 +10,7 @@ public class Transport {
     private final String model;
     private final String type;
 
-    public Transport (final String type, final String model) {
+    public Transport(final String type, final String model) {
         this.model = model;
         this.type = type;
     }
@@ -24,14 +24,15 @@ public class Transport {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Transport transport = (Transport) o;
+
+        final Transport transport = (Transport) o;
         return model.equals(transport.model) && type.equals(transport.type);
     }
 
