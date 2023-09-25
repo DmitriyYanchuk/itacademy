@@ -25,13 +25,6 @@
     <servlet-api.version>4.0.1</servlet-api.version>
   </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-    </dependency>
-  </dependencies>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -58,7 +51,6 @@
         <version>${mockito.version}</version>
         <scope>test</scope>
       </dependency>
-
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>

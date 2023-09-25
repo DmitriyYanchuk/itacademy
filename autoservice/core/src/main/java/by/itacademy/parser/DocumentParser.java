@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface DocumentParser {
 
-    List<Transport> parse() throws DocumentParserException;
+    List<Transport> parse(String content) throws DocumentParserException;
 }

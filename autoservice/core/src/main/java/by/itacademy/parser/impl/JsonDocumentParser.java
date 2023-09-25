@@ -12,14 +12,8 @@ import java.util.List;
 
 public class JsonDocumentParser implements DocumentParser {
 
-    private final String content;
-
-    public JsonDocumentParser(final String content) {
-        this.content = content;
-    }
-
     @Override
-    public final List<Transport> parse() throws DocumentParserException {
+    public final List<Transport> parse(final String content) throws DocumentParserException {
         try {
             final List<Transport> allTransport = new ArrayList<>();
             final JSONArray transportArray = new JSONArray(content);

@@ -20,10 +20,10 @@ public class ContentDecoder implements Decoder {
     public final String getDecodedContent() throws IOException {
         try (final BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream(), CHARSET))) {
             final String content = reader.lines().reduce("", String::concat);
-            final String jsonContent = content.split("=")[1];
+            final String jsonContent = content.split("=")[0];
 
             final String decodedContent = URLDecoder.decode(jsonContent, CHARSET);
-            return new ByteArrayInputStream(decodedContent.getBytes(CHARSET)).toString();
+            return decodedContent;
         }
     }
 }

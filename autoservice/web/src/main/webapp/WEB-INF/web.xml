@@ -6,22 +6,13 @@
          version="4.0">
   <display-name>Transport App</display-name>
 
-  <context-param>
-    <param-name>first-param</param-name>
-    <param-value>first-param-value</param-value>
-  </context-param>
-  <context-param>
-    <param-name>second-param</param-name>
-    <param-value>second-param-value</param-value>
-  </context-param>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
 
   <servlet>
     <servlet-name>TransportServlet</servlet-name>
     <servlet-class>it.academy.web.servlet.TransportServlet</servlet-class>
-    <init-param>
-      <param-name>servlet-param</param-name>
-      <param-value>servlet-param-value</param-value>
-    </init-param>
   </servlet>
 
   <servlet-mapping>
@@ -34,7 +25,4 @@
     <location>/404.html</location>
   </error-page>
 
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-  </welcome-file-list>
 </web-app>

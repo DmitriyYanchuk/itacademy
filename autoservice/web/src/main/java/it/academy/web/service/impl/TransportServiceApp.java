@@ -6,6 +6,9 @@ import by.itacademy.parser.impl.JsonDocumentParser;
 import by.itacademy.processor.Processor;
 import by.itacademy.processor.ProcessorException;
 import by.itacademy.processor.imp.TransportProcessor;
+import by.itacademy.sorter.SortingList;
+import by.itacademy.sorter.SortingListException;
+import by.itacademy.sorter.impl.TransportSorter;
 import by.itacademy.transport.Transport;
 import by.itacademy.validator.ValidationProcessor;
 import by.itacademy.validator.ValidationProcessorException;
@@ -28,8 +31,8 @@ public class TransportServiceApp implements Service {
         final Decoder decoder = new ContentDecoder(request);
 
         try {
-            final DocumentParser parser = new JsonDocumentParser(decoder.getDecodedContent());
-            final List<Transport> transportList = parser.parse();
+            final DocumentParser parser = new JsonDocumentParser();
+            final List<Transport> transportList = parser.parse(decoder.getDecodedContent());
 
             final ValidationProcessor validationProcessor = new ParameterValidationProcessor();
             final List<Transport> approvedProcessesTransport =
@@ -43,16 +46,37 @@ public class TransportServiceApp implements Service {
             final List<String> modifiedInvalidTransport =
                     processor.processInvalidTransport(approvedInvalidTransport);
 
-            final Response responseServer = new HtmlResponse();
-            response.getWriter().println(responseServer.response(modifiedProcessedTransport, true, "Processed-Transport"));
-            response.getWriter().println(responseServer.response(modifiedInvalidTransport, false, "Invalid-Transport"));
+            final String sortingType = request.getParameter("sortingType");
+            final int typeParameter = Integer.parseInt(sortingType);
+            final String sortingOrder = request.getParameter("sortingOrder");
+            final int orderParameter = Integer.parseInt(sortingOrder);
 
-        } catch (DocumentParserException exc) {
+            final SortingList sortingList = new TransportSorter(typeParameter, orderParameter);
+            final List<String> sortedTransport = sortingList.sorting(modifiedProcessedTransport);
+
+            final Response responseServer = new HtmlResponse();
+            final String processedTransport = getWriter(sortedTransport, true,
+                    "Processed-Transport", responseServer);
+            final String invalidTransport = getWriter(modifiedInvalidTransport, false,
+                    "Invalid-Transport", responseServer);
+            response.getWriter().println(processedTransport);
+            response.getWriter().println(invalidTransport);
+
+        } catch (final DocumentParserException exc) {
             throw new RuntimeException("JSON parsing failed", exc);
-        } catch (ValidationProcessorException exc) {
+        } catch (final ValidationProcessorException exc) {
             throw new RuntimeException("Failed to validation", exc);
-        } catch (ProcessorException exc) {
+        } catch (final ProcessorException exc) {
             throw new RuntimeException("The list being modified does not exist", exc);
+        } catch (final SortingListException exc) {
+            throw new RuntimeException("Sorting error", exc);
         }
+    }
+
+    private static String getWriter(
+            final List<String> transports, final boolean isValid,
+            final String columnName, Response response
+    ) {
+        return response.response(transports, isValid, columnName);
     }
 }
