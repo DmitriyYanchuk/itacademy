@@ -6,7 +6,4 @@ public class DaoException extends Exception {
         super(message, cause);
     }
 
-    public DaoException(final String message) {
-        super(message);
-    }
 }
