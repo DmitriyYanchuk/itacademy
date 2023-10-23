@@ -88,7 +88,7 @@ public abstract class GenericJdbcDao<T, E extends DaoException> implements Dao<T
         try {
             final Class<?> driverClass = Class.forName(driverName);
 
-            final boolean isNotRegistered = DriverManager.drivers().noneMatch(dr -> dr.getClass().equals(driverName));
+            final boolean isNotRegistered = DriverManager.drivers().noneMatch(dr -> dr.getClass().equals(driverClass));
             if (isNotRegistered) {
                 final Driver driver = (Driver) driverClass.getDeclaredConstructor().newInstance();
                 DriverManager.registerDriver(driver);

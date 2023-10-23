@@ -5,6 +5,8 @@ import it.academy.entity.base.BaseEntity;
 import it.academy.entity.transport.Model;
 import it.academy.entity.transport.TransportType;
 
+import java.util.Objects;
+
 public class Transport extends BaseEntity {
 
     private final Model model;
@@ -33,5 +35,23 @@ public class Transport extends BaseEntity {
 
     public final Client getClient() {
         return client;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Transport transport = (Transport) o;
+        return model == transport.model && transportType == transport.transportType && Objects.equals(client, transport.client);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(model, transportType, client);
     }
 }

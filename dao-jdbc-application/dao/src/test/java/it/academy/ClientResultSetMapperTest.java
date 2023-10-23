@@ -11,8 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,5 +43,19 @@ class ClientResultSetMapperTest {
         verify(rs).getString("last_name");
 
         verifyNoMoreInteractions(rs);
+    }
+
+    @Test
+    void testMap_ResultSetMapperException() throws SQLException {
+        //given
+        final Client expectedClient = new Client(5, "Justyna", "Gorska");
+        when(rs.next()).thenReturn(true);
+        when(rs.getInt("id")).thenReturn(expectedClient.getId());
+        when(rs.getString("first_name")).thenThrow(SQLException.class);
+
+        //then
+        assertThrows(ResultSetMapperException.class, () -> {
+            final Client actualClient = new ClientResultSetMapper().map(rs);
+        });
     }
 }

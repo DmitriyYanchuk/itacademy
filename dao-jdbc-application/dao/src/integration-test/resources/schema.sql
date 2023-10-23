@@ -30,11 +30,17 @@ create table if not exists transport
 );
 
 insert into model_type (name) values
-('BMW_M3_1996'),
-('AUDI_A7_2023'),
-('MAN_L130_2020');
+('BMW 520d'),
+('Mercedes-Benz Viano'),
+('Kawasaki ZZR'),
+('Porsche Panamera'),
+('Audi A7'),
+('Volkswagen T6'),
+('Suzuki GSX-S1000'),
+('Yamaha FJR1300ES'),
+('Ford Transit');
 
 insert into transport_type (name) values
-('Motorbike'),
-('Car'),
-('Bus');
+('automobile'),
+('motorbike'),
+('minibus');

@@ -2,6 +2,8 @@ package it.academy.entity.client;
 
 import it.academy.entity.base.BaseEntity;
 
+import java.util.Objects;
+
 public class Client extends BaseEntity {
 
     private final String firstName;
@@ -19,5 +21,23 @@ public class Client extends BaseEntity {
 
     public final String getLastName() {
         return lastName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Client client = (Client) o;
+        return Objects.equals(firstName, client.firstName) && Objects.equals(lastName, client.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName);
     }
 }
