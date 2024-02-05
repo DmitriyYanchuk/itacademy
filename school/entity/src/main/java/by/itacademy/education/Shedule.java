@@ -12,9 +12,6 @@ import java.util.List;
 @Table(name = "shedule")
 public class Shedule extends BaseEntity {
 
-    @OneToMany(mappedBy = "shedule")
-    private List<Group> groups;
-
     @ManyToMany(mappedBy = "shedule")
     private List<Lesson> lesson;
 
@@ -35,26 +32,16 @@ public class Shedule extends BaseEntity {
 
     public Shedule(
             final Integer id,
-            final List<Group> groups,
             final List<Lesson> lesson,
             final School school,
             final OffsetDateTime startDate,
             final OffsetDateTime endDate
     ) {
         super(id);
-        this.groups = groups;
         this.lesson = lesson;
         this.school = school;
         this.startDate = startDate;
         this.endDate = endDate;
-    }
-
-    public final List<Group> getGroups() {
-        return groups;
-    }
-
-    public void setGroups(final List<Group> groups) {
-        this.groups = groups;
     }
 
     public final List<Lesson> getLesson() {

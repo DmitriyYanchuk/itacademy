@@ -2,7 +2,8 @@ package by.itacademy.persons;
 
 import by.itacademy.base.BaseEntity;
 import by.itacademy.education.Lesson;
-import by.itacademy.education.Shedule;
+import by.itacademy.education.StudentGroupSubjectLink;
+import by.itacademy.education.Subject;
 import by.itacademy.place.Auditory;
 import by.itacademy.place.School;
 import jakarta.persistence.*;
@@ -10,7 +11,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "groupe")
+@Table(name = "group")
 public class Group extends BaseEntity {
 
     @ManyToMany(mappedBy = "groups")
@@ -31,15 +32,6 @@ public class Group extends BaseEntity {
     )
     private School school;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "shedule_id",
-            referencedColumnName = "id",
-            nullable = false,
-            foreignKey = @ForeignKey(name = "fk__group__shedule__id")
-    )
-    private Shedule shedule;
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "group_student",
@@ -55,6 +47,12 @@ public class Group extends BaseEntity {
             )
     )
     private List<Student> students;
+
+    @OneToMany(mappedBy = "group")
+    private List<StudentGroupSubjectLink> studentGroupSubjectLinks;
+
+    @ManyToMany(mappedBy = "group")
+    private List<Subject> subjects;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
@@ -78,8 +76,9 @@ public class Group extends BaseEntity {
             final String name,
             final List<Lesson> lessons,
             final School school,
-            final Shedule shedule,
             final List<Student> students,
+            final List<StudentGroupSubjectLink> studentGroupSubjectLinks,
+            final List<Subject> subjects,
             final List<Teacher> teachers
     ) {
         super(id);
@@ -87,8 +86,9 @@ public class Group extends BaseEntity {
         this.name = name;
         this.lessons = lessons;
         this.school = school;
-        this.shedule = shedule;
         this.students = students;
+        this.studentGroupSubjectLinks = studentGroupSubjectLinks;
+        this.subjects = subjects;
         this.teachers = teachers;
     }
 
@@ -124,20 +124,28 @@ public class Group extends BaseEntity {
         this.school = school;
     }
 
-    public final Shedule getShedule() {
-        return shedule;
-    }
-
-    public void setShedule(final Shedule shedule) {
-        this.shedule = shedule;
-    }
-
     public final List<Student> getStudents() {
         return students;
     }
 
     public void setStudents(final List<Student> students) {
         this.students = students;
+    }
+
+    public final List<StudentGroupSubjectLink> getStudentGroupSubjectLinks() {
+        return studentGroupSubjectLinks;
+    }
+
+    public void setStudentGroupSubjectLinks(final List<StudentGroupSubjectLink> studentGroupSubjectLinks) {
+        this.studentGroupSubjectLinks = studentGroupSubjectLinks;
+    }
+
+    public final List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(final List<Subject> subjects) {
+        this.subjects = subjects;
     }
 
     public final List<Teacher> getTeachers() {

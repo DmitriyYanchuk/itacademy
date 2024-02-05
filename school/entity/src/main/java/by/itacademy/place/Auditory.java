@@ -3,6 +3,7 @@ package by.itacademy.place;
 import by.itacademy.base.BaseEntity;
 import by.itacademy.education.Lesson;
 import by.itacademy.persons.Group;
+import by.itacademy.persons.Teacher;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -39,16 +40,34 @@ public class Auditory extends BaseEntity {
     )
     private School school;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "auditory_teacher",
+            joinColumns = @JoinColumn(
+                    name = "teacher_id",
+                    referencedColumnName = "id",
+                    foreignKey = @ForeignKey(name = "fk__auditory_teacher__teacher__id")
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "auditory_id",
+                    referencedColumnName = "id",
+                    foreignKey = @ForeignKey(name = "fk__teacher_auditory__auditory__id")
+            )
+    )
+    private Teacher teacher;
+
     public Auditory(
             final Integer id,
             final List<Group> groups,
             final List<Lesson> lessons,
-            final School school
+            final School school,
+            final Teacher teacher
     ) {
         super(id);
         this.groups = groups;
         this.lessons = lessons;
         this.school = school;
+        this.teacher = teacher;
     }
 
     public final List<Group> getGroups() {
@@ -73,5 +92,13 @@ public class Auditory extends BaseEntity {
 
     public void setSchool(final School school) {
         this.school = school;
+    }
+
+    public final Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(final Teacher teacher) {
+        this.teacher = teacher;
     }
 }

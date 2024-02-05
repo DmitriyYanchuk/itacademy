@@ -11,15 +11,19 @@ public class BaseEntity implements Identifier {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Integer id;
+    private Integer id;
 
     public BaseEntity(final Integer id) {
         this.id = id;
     }
 
-
     @Override
     public final Integer getId() {
         return id;
+    }
+
+    @Override
+    public void setId(final Integer id) {
+        this.id = id;
     }
 }

@@ -1,7 +1,7 @@
 package by.itacademy.education;
 
 import by.itacademy.base.BaseEntity;
-import by.itacademy.persons.Student;
+import by.itacademy.persons.Group;
 import by.itacademy.place.School;
 import by.itacademy.persons.Teacher;
 import jakarta.persistence.*;
@@ -18,21 +18,24 @@ public class Subject extends BaseEntity {
     @ManyToMany(mappedBy = "subjects")
     private List<School> schools;
 
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
-            name = "subject_student",
+            name = "subject_group",
             joinColumns = @JoinColumn(
-                    name = "student_id",
+                    name = "group_id",
                     referencedColumnName = "id",
-                    foreignKey = @ForeignKey(name = "fk__subject_student__student__id")
+                    foreignKey = @ForeignKey(name = "fk__subject_group__group__id")
             ),
             inverseJoinColumns = @JoinColumn(
                     name = "subject_id",
                     referencedColumnName = "id",
-                    foreignKey = @ForeignKey(name = "fk__student_subject__subject__id")
+                    foreignKey = @ForeignKey(name = "fk__group_subject__subject__id")
             )
     )
-    private List<Student> students;
+    private List<Group> groups;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
@@ -54,13 +57,15 @@ public class Subject extends BaseEntity {
             final Integer id,
             final List<Lesson> lessons,
             final List<School> schools,
-            final List<Student> students,
+            final String name,
+            final List<Group> groups,
             final List<Teacher> teachers
     ) {
         super(id);
         this.lessons = lessons;
         this.schools = schools;
-        this.students = students;
+        this.name = name;
+        this.groups = groups;
         this.teachers = teachers;
     }
 
@@ -80,12 +85,20 @@ public class Subject extends BaseEntity {
         this.schools = schools;
     }
 
-    public final List<Student> getStudents() {
-        return students;
+    public final String getName() {
+        return name;
     }
 
-    public void setStudents(final List<Student> students) {
-        this.students = students;
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    public final List<Group> getGroup() {
+        return groups;
+    }
+
+    public void setGroup(final List<Group> groups) {
+        this.groups = groups;
     }
 
     public final List<Teacher> getTeachers() {

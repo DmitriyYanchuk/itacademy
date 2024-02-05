@@ -6,10 +6,10 @@ import jakarta.persistence.Column;
 public class BasePerson extends BaseEntity implements PersonalData {
 
     @Column(name = "first_name", length = 50, nullable = false)
-    private final String firstName;
+    private String firstName;
 
     @Column(name = "last_name", length = 50, nullable = false)
-    private final String lastName;
+    private String lastName;
 
     public BasePerson(final Integer id, final String firstName, final String lastName) {
         super(id);
@@ -27,5 +27,13 @@ public class BasePerson extends BaseEntity implements PersonalData {
         return lastName;
     }
 
+    @Override
+    public void setFirstName(final String firstName) {
+        this.firstName = firstName;
+    }
 
+    @Override
+    public void setLastName(final String lastName) {
+        this.lastName = lastName;
+    }
 }

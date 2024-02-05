@@ -3,7 +3,7 @@ package by.itacademy.persons;
 import by.itacademy.base.BasePerson;
 import by.itacademy.education.Assessment;
 import by.itacademy.education.Attend;
-import by.itacademy.education.Subject;
+import by.itacademy.education.Lesson;
 import by.itacademy.place.School;
 import jakarta.persistence.*;
 
@@ -29,7 +29,7 @@ public class Student extends BasePerson {
     private List<School> schools;
 
     @ManyToMany(mappedBy = "students")
-    private List<Subject> subjects;
+    private List<Lesson> lessons;
 
     public Student(
             final Integer id,
@@ -40,7 +40,7 @@ public class Student extends BasePerson {
             final List<Group> groups,
             final List<Parent> parent,
             final List<School> schools,
-            final List<Subject> subjects
+            final List<Lesson> lessons
     ) {
         super(id, firstName, lastName);
         this.assessments = assessments;
@@ -48,7 +48,7 @@ public class Student extends BasePerson {
         this.groups = groups;
         this.parent = parent;
         this.schools = schools;
-        this.subjects = subjects;
+        this.lessons = lessons;
     }
 
     public final List<Assessment> getAssessments() {
@@ -91,11 +91,11 @@ public class Student extends BasePerson {
         this.schools = schools;
     }
 
-    public final List<Subject> getSubjects() {
-        return subjects;
+    public final List<Lesson> getLessons() {
+        return lessons;
     }
 
-    public void setSubjects(final List<Subject> subjects) {
-        this.subjects = subjects;
+    public void setLessons(final List<Lesson> lessons) {
+        this.lessons = lessons;
     }
 }

@@ -2,7 +2,6 @@ package by.itacademy.education;
 
 
 import by.itacademy.persons.Student;
-import by.itacademy.persons.Teacher;
 import jakarta.persistence.*;
 
 @Entity
@@ -32,15 +31,6 @@ public class Assessment {
     )
     private Student student;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "teacher_id",
-            referencedColumnName = "id",
-            nullable = false,
-            foreignKey = @ForeignKey(name = "fk__assessment__teacher__id")
-    )
-    private Teacher teacher;
-
     @Column(name = "value", nullable = false, length = 2)
     private Integer value;
 
@@ -48,13 +38,11 @@ public class Assessment {
             final Long id,
             final Lesson lesson,
             final Student student,
-            final Teacher teacher,
             final Integer value
     ) {
         this.id = id;
         this.lesson = lesson;
         this.student = student;
-        this.teacher = teacher;
         this.value = value;
     }
 
@@ -76,14 +64,6 @@ public class Assessment {
 
     public void setStudent(final Student student) {
         this.student = student;
-    }
-
-    public final Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(final Teacher teacher) {
-        this.teacher = teacher;
     }
 
     public final Integer getValue() {

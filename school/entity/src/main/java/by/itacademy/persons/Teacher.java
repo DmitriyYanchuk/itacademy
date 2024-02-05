@@ -4,6 +4,7 @@ import by.itacademy.base.BasePerson;
 import by.itacademy.education.Assessment;
 import by.itacademy.education.Lesson;
 import by.itacademy.education.Subject;
+import by.itacademy.place.Auditory;
 import by.itacademy.place.School;
 import jakarta.persistence.*;
 
@@ -12,6 +13,9 @@ import java.util.List;
 @Entity
 @Table(name = "teacher")
 public class Teacher extends BasePerson {
+
+    @ManyToMany(mappedBy = "teacher")
+    private Auditory auditory;
 
     @OneToMany(mappedBy = "teacher")
     private List<Assessment> assessments;
